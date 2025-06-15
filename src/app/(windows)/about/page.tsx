@@ -3,6 +3,7 @@
 import { ArrowLeft, Footprints, Info } from "lucide-react";
 import { useState } from "react";
 import { settings } from "@/config/app";
+import Image from "next/image";
 
 export default function AboutWindow() {
     const imageLink = '/man-with-laptop.png';
@@ -19,7 +20,8 @@ export default function AboutWindow() {
         <div className="h-full bg-gradient-to-b from-slate-200 to-white/80 backdrop-blur-3xl lg:max-h-[calc(70vh-100px)] overflow-y-auto">
             {!showJourney &&             
                 <div className="flex flex-col sm:flex-row gap-2 items-center">
-                    <img className="w-sm" src={imageLink} alt="about me" draggable={false} />
+                    <Image src={imageLink} alt="about me" draggable={false} width={400} height={400} className="w-sm" />
+                    {/* <img className="w-sm" src={imageLink} alt="about me" draggable={false} /> */}
                     <div className="flex flex-col gap-2 px-6 text-balance">
                         <h2 className="text-2xl font-light mb-2 charm text-center sm:text-left">Hello! Its me. <span className="text-blue-500 font-semibold border-b border-dashed">Matheen</span>.</h2>
                         <p className="mt-1 mb-2 text-center sm:text-left">Let me introduce myself. Am very <strong className="italic border-b border-slate-300 border-dotted">innovative</strong>, <strong className="italic border-b border-slate-300 border-dotted">introverted</strong>, <strong className="italic border-b border-slate-300 border-dotted">interesting</strong> person who can code and do more than code.</p>

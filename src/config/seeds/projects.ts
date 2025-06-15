@@ -37,7 +37,7 @@ export const projects = [
     {
         id: 'customwebsites',
         title: "Laravel / Shopify / Wordpress Websites",
-        description: "Custom websites for clients",
+        description: "More than 20 custom tailored websites for clients based on business requirements",
         tags: ['Laravel', 'Shopify', 'Wordpress'],
         image: '/customwebsites.png'
     }

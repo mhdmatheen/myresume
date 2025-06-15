@@ -10,12 +10,13 @@ import { useState, useEffect, useRef } from "react";
 
 interface TaskbarProps {
     onAppClick: (app: string) => void;
-    openApps: string[]; // List of opened apps
+    openApps: string[]; 
+    currentWindow: string | null;
+    setCurrentWindow: (window: string) => void;
 }
 
-export const Taskbar = ({ onAppClick, openApps }: TaskbarProps) => {
-    const [startOpen, setStartOpen] = useState(false);
-    const [currentWindow, setCurrentWindow] = useState('');
+export const Taskbar = ({ onAppClick, openApps, currentWindow, setCurrentWindow }: TaskbarProps) => {
+    const [startOpen, setStartOpen] = useState(false);  
     const menuRef = useRef<HTMLDivElement>(null);
     const userImage = settings.userImage;
 
@@ -46,6 +47,20 @@ export const Taskbar = ({ onAppClick, openApps }: TaskbarProps) => {
         onAppClick(app);
         setStartOpen(false);
     };
+
+    const Clock = () => {
+        const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+      
+        React.useEffect(() => {
+          const timer = setInterval(() => {
+            setTime(new Date().toLocaleTimeString());
+          }, 1000);
+      
+          return () => clearInterval(timer);
+        }, []);
+      
+        return <span>{time}</span>;
+      };      
 
     return (
         <div className="taskbar-wrapper">
@@ -85,21 +100,23 @@ export const Taskbar = ({ onAppClick, openApps }: TaskbarProps) => {
             )}
 
             {/* Taskbar */}
-            <div className="fixed bottom-0 left-0 right-0 z-40 px-4 py-2 backdrop-blur-md bg-cyan-200/30 border-t border-white/30 flex gap-3 items-center">
-                {/* Start Button */}
-                <button
-                    id="start-button"
-                    onClick={() => setStartOpen((prev) => !prev)}
-                    className="pl-2 pr-3 py-1 flex gap-1 items-center justify-center text-white font-bold rounded-full overflow-hidden hover:bg-white/20 transition backdrop-blur-sm border border-white/20 shadow-lg shadow-white/10"
-                >
-                    <img className="w-6 h-6 rounded-full" src={userImage} alt="User Image" draggable={false} />
-                    Start
-                </button>
+            <div className="fixed -bottom-[1px] left-0 right-0 z-40 pl-4 backdrop-blur-md bg-cyan-200/30 border-t border-white/30 flex gap-3 items-center">
+                <div className="py-2">
+                    {/* Start Button */}
+                    <button
+                        id="start-button"
+                        onClick={() => setStartOpen((prev) => !prev)}
+                        className="pl-2 pr-3 py-1 flex gap-1 items-center justify-center text-white font-bold rounded-full overflow-hidden hover:bg-white/20 transition backdrop-blur-sm border border-white/20 shadow-lg shadow-white/10"
+                    >
+                        <img className="w-6 h-6 rounded-full" src={userImage} alt="User Image" draggable={false} />
+                        Start
+                    </button>
+                </div>
 
                 <div className="border-r h-full border-white/20 mr-2">&nbsp;</div>
 
                 {/* Open Apps Scrollable Container */}
-                <div className="flex-1 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent">
+                <div className="flex-1 py-2 overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent">
                     <div className="flex gap-2">
                         {openApps && openApps.length > 0 && openApps.map((app) => {
                             const matchedItem = startMenuItems.find(item => item.app === app);
@@ -121,6 +138,13 @@ export const Taskbar = ({ onAppClick, openApps }: TaskbarProps) => {
                                 </button>
                             );
                         })}
+                    </div>
+                </div>
+
+                <div className="hidden sm:flex py-2 pr-4 pl-8 text-white text-xs font-bold monospace gap-2 items-center bg-gradient-to-l from-blue-900/70 to-transparent from-50%">
+                    <div className="flex flex-col items-center">
+                        <div>{new Date().toLocaleDateString()}</div>
+                        <div><Clock /></div>
                     </div>
                 </div>
 

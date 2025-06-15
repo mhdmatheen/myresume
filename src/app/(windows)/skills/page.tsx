@@ -1,3 +1,4 @@
+import WindowHeader from "@/app/shell/components/window-header";
 import { skills } from "@/config/seeds/skills";
 
 // Define the type of skills
@@ -8,7 +9,7 @@ export default function SkillsWindow () {
     
     return (
         <div className="bg-white/80 p-6">
-            <h1 className="font-semibold text-lg text-slate-500 mb-4">My expanding skill sets</h1>
+            <WindowHeader title="Skills" description="My expanding skill sets" icon="/soft-skills.png" />
 
             {skillTypes.map((type, idx) => (
                 <div key={idx} className="mb-8">

@@ -7,17 +7,26 @@ import About from "@/app/(windows)/about/page";
 import ExperiencesWindow from "./(windows)/experiences/page";
 import SkillsWindow from "./(windows)/skills/page";
 import ProjectsWindow from "./(windows)/projects/page";
+import CodeWindow from "./code/page";
 
 export default function Desktop() {
   const [openWindows, setOpenWindows] = useState<string[]>([]);
   const [openApps, setOpenApps] = useState<string[]>([]);
   const [currentWindow, setCurrentWindow] = useState<string | null>(null);
 
+  const windowConfig = [
+    { title: "About", component: <About /> },
+    { title: "Experiences", component: <ExperiencesWindow /> },
+    { title: "Projects", component: <ProjectsWindow /> },
+    { title: "Skills", component: <SkillsWindow /> },
+    { title: "Code", component: <CodeWindow /> },
+  ];
+
   useEffect(() => {
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
     };
-  
+
     document.addEventListener("contextmenu", handleContextMenu);
     return () => {
       document.removeEventListener("contextmenu", handleContextMenu);
@@ -50,30 +59,30 @@ export default function Desktop() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Render windows */}
-      {openWindows.includes("About") && (
-        <Window title="About" onClose={() => closeWindow("About")} currentWindow={currentWindow} setCurrentWindow={setCurrentWindow}>
-          <About />
-        </Window>
-      )}
-      {openWindows.includes("Experiences") && (
-        <Window title="Experiences" onClose={() => closeWindow("Experiences")} currentWindow={currentWindow} setCurrentWindow={setCurrentWindow}>
-          <ExperiencesWindow />
-        </Window>
-      )}
-      {openWindows.includes("Projects") && (
-        <Window title="Projects" onClose={() => closeWindow("Projects")} currentWindow={currentWindow} setCurrentWindow={setCurrentWindow}>
-          <ProjectsWindow />
-        </Window>
-      )}
-      {openWindows.includes("Skills") && (
-        <Window title="Skills" onClose={() => closeWindow("Skills")} currentWindow={currentWindow} setCurrentWindow={setCurrentWindow}>
-          <SkillsWindow />
-        </Window>
-      )}
+      <div className="relative min-h-screen overflow-hidden">
+        {windowConfig.map(({ title, component }) =>
+          openWindows.includes(title) ? (
+            <Window
+              key={title}
+              title={title}
+              onClose={() => closeWindow(title)}
+              currentWindow={currentWindow}
+              setCurrentWindow={setCurrentWindow}
+            >
+              {component}
+            </Window>
+          ) : null
+        )}
 
-      {/* Taskbar */}
-      <Taskbar onAppClick={handleAppClick} openApps={openApps} />
+        {/* Taskbar */}
+        <Taskbar
+          onAppClick={handleAppClick}
+          openApps={openApps}
+          currentWindow={currentWindow}
+          setCurrentWindow={setCurrentWindow}
+        />
+      </div>
+
     </div>
   );
 }

@@ -91,7 +91,7 @@ export const Window = ({
     <div
       ref={windowRef}
       className={`
-            absolute bg-gradient-to-bl from-blue-200/30 to-white/20 backdrop-blur-3xl shadow-2xl border border-gray-300
+            absolute window backdrop-blur-3xl shadow-2xl border border-gray-300
             ${!isMobile && windowType === "dialog" && "max-w-[300px]"}
             ${!isMobile && windowType === "window" && "max-w-[70vw]"}
             ${isMobile && "max-w-[100vw]"}
@@ -109,14 +109,14 @@ export const Window = ({
           onMouseDown={onMouseDown}
           className={`${
             isMobile ? "cursor-default" : "cursor-grab"
-          } text-white pl-4 flex justify-between items-start rounded-t overflow-hidden`}
+          } text-white pl-4 pr-1 flex justify-between items-start rounded-t overflow-hidden`}
         >
           <div className="font-semibold text-shadow text-white text-stroke-3 tracking-wider py-2">{title}</div>
           <button
-            className="bg-red-600/80 text-white hover:bg-red-500 text-lg px-3 py-1 rounded-tr-lg rounded-bl-lg"
+            className="close-button text-white text-lg px-4 py-[3px] rounded-b-lg"
             onClick={onClose}
           >
-            <X size={20} />
+            <X size={16} />
           </button>
         </div>
         <div className="px-[4px] pb-[4px]">
