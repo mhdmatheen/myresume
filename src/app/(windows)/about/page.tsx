@@ -5,7 +5,7 @@ import { useState } from "react";
 import { settings } from "@/config/app";
 
 export default function AboutWindow() {
-    const imageLink = 'https://www.matheen.dev/man-with-laptop.png';
+    const imageLink = '/man-with-laptop.png';
     const [showJourney, setShowJourney] = useState(false);
     const userImage = settings.userImage;
 
