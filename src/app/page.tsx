@@ -8,6 +8,7 @@ import ExperiencesWindow from "./(windows)/experiences/page";
 import SkillsWindow from "./(windows)/skills/page";
 import ProjectsWindow from "./(windows)/projects/page";
 import CodeWindow from "./code/page";
+import { desktopIcons } from "@/config/window-list";
 
 export default function Desktop() {
   const [openWindows, setOpenWindows] = useState<string[]>([]);
@@ -59,30 +60,39 @@ export default function Desktop() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="relative min-h-screen overflow-hidden">
-        {windowConfig.map(({ title, component }) =>
-          openWindows.includes(title) ? (
-            <Window
-              key={title}
-              title={title}
-              onClose={() => closeWindow(title)}
-              currentWindow={currentWindow}
-              setCurrentWindow={setCurrentWindow}
-            >
-              {component}
-            </Window>
-          ) : null
-        )}
-
-        {/* Taskbar */}
-        <Taskbar
-          onAppClick={handleAppClick}
-          openApps={openApps}
-          currentWindow={currentWindow}
-          setCurrentWindow={setCurrentWindow}
-        />
+      <div className="desktop-icon-container inline-flex w-fit flex-col gap-2 p-4 absolute top-0 left-0 right-0">
+        {desktopIcons.map((icon) => (
+          <div
+            key={icon.app}
+            className="desktop-icon px-4 py-2 flex flex-col gap-2 items-center cursor-pointer hover:bg-white/20 rounded border border-transparent hover:border-white/20 col-span-2"
+            onClick={() => handleAppClick(icon.app)}
+          >
+            {icon.icon}
+            <p className="text-stroke-3 text-white text-xs">{icon.name}</p>
+          </div>
+        ))}
       </div>
+      {windowConfig.map(({ title, component }) =>
+        openWindows.includes(title) ? (
+          <Window
+            key={title}
+            title={title}
+            onClose={() => closeWindow(title)}
+            currentWindow={currentWindow}
+            setCurrentWindow={setCurrentWindow}
+          >
+            {component}
+          </Window>
+        ) : null
+      )}
 
+      {/* Taskbar */}
+      <Taskbar
+        onAppClick={handleAppClick}
+        openApps={openApps}
+        currentWindow={currentWindow}
+        setCurrentWindow={setCurrentWindow}
+      />
     </div>
   );
 }
