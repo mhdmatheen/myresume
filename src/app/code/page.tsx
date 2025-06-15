@@ -29,6 +29,17 @@ export default function CodeWindow() {
                 <p className="text-slate-700 font-medium text-xs">The reason I specifically chose Windows 7 is because it was at that time I started nurturing my creativity. I was doing a lot of things with Windows 7 and it became one of my closest and personal memories. </p>
             </div>
 
+            <div className="border border-slate-300 p-4 rounded mb-2">
+                <div className="flex items-center gap-2 text-md font-semibold mb-2"><Info size={20} /> Credits</div>
+                <p className="text-slate-700 font-medium text-xs">
+                    The following resources from 3rd party services have been used in this projects
+                </p>
+                <ul className="text-xs list-disc pl-6 mt-2 text-blue-700 underline">
+                    <li><a href="https://www.flaticon.com/" target="_blank">Flaticon</a></li>
+                    <li><a href="https://fonts.google.com/" target="_blank">Google Fonts</a></li>
+                </ul>
+            </div>
+
             <div className="border border-slate-300 p-4 rounded">
                 <div className="flex items-center gap-2 text-md font-semibold mb-2"><Info size={20} />Where can I find this project?</div>
                 <p className="text-slate-700 font-medium text-xs">My code repository is available on GitHub.</p>

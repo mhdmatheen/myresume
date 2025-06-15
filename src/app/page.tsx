@@ -9,6 +9,7 @@ import SkillsWindow from "./(windows)/skills/page";
 import ProjectsWindow from "./(windows)/projects/page";
 import CodeWindow from "./code/page";
 import { desktopIcons } from "@/config/window-list";
+import FeedbackWindow from "./(windows)/feedback/page";
 
 export default function Desktop() {
   const [openWindows, setOpenWindows] = useState<string[]>([]);
@@ -21,6 +22,7 @@ export default function Desktop() {
     { title: "Projects", component: <ProjectsWindow /> },
     { title: "Skills", component: <SkillsWindow /> },
     { title: "Code", component: <CodeWindow /> },
+    { title: "Feedback", component: <FeedbackWindow /> },
   ];
 
   useEffect(() => {

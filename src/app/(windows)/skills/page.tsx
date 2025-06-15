@@ -13,7 +13,7 @@ export default function SkillsWindow () {
 
             {skillTypes.map((type, idx) => (
                 <div key={idx} className="mb-8">
-                    <h4 className="font-semibold text-md text-slate-500 capitalize">{type}</h4>
+                    <h4 className="font-semibold text-md text-slate-500 capitalize mb-4 border-b border-slate-300 pb-2">{type}</h4>
                     <div className="flex flex-wrap gap-2">
                         {skills[type].map((skill, idx) => (
                             <div key={idx} className="bg-white px-4 py-2 rounded shadow-sm  font-medium text-sm text-slate-500 flex flex-col gap-1 items-center justify-center">
