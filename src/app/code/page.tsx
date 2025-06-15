@@ -1,3 +1,5 @@
+"use client";
+
 import { Info } from "lucide-react";
 import WindowHeader from "../shell/components/window-header";
 
