@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Head from "next/head";
-import AboutTab from "./tabs/about/page";
+import AboutWindow from "./(windows)/about/page";
 
 const tabs = ["About", "Projects", "Skills", "Contact"];
 
@@ -14,7 +14,7 @@ export default function HomePage() {
       <Head>
         <title>My Portfolio</title>
       </Head>
-      <main className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4">
+      <main className="min-h-screen flex flex-col items-center py-10 px-4">
         <h1 className="text-4xl font-light mb-6 monospace text-slate-500 text-shadow flex items-end">hello world<div className="h-[3px] w-[18px] bg-slate-500 animate-pulse">&nbsp;</div></h1>
         <div className="flex gap-8 mb-8">
           {tabs.map((tab) => (
@@ -29,9 +29,9 @@ export default function HomePage() {
           ))}
         </div>
 
-        <div className="w-full max-w-4xl bg-white p-6 rounded-2xl shadow-md">
+        <div className="w-full max-w-4xl bg-white p-6 rounded-2xl dark:text-slate-700 shadow-md">
           {activeTab === "About" && (
-            <AboutTab></AboutTab>
+            <AboutWindow></AboutWindow>
           )}
           {activeTab === "Projects" && (
             <div>
